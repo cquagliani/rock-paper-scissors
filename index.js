@@ -10,37 +10,71 @@ getComputerChoice = () => {
 
 playRound = (playerSelection, computerSelection) => {
 
-    let winner;
-    let message;
     let playerSelectionMod = playerSelection.toUpperCase();
     let computerSelectionMod = computerSelection.toUpperCase();
+    let winner, message;
+    let messagesList = {
+        tie: 'You tied! Try again.', 
+        player: `Congratulations! ${playerSelection} beats ${computerSelection}.`, 
+        computer: `You lost! ${computerSelection} beats ${playerSelection}.`
+    };
 
     if (playerSelectionMod == computerSelectionMod) {
-        winner = 'Tie';
+        winner = "Tie";
+        message = messagesList["tie"];
     }
     else if (playerSelectionMod == 'ROCK' && computerSelectionMod == 'SCISSORS') {
-        winner = playerSelectionMod;
+        winner = "Player";
+        message = messagesList["player"];
     } else if (playerSelectionMod== 'SCISSORS' && computerSelectionMod == 'PAPER') {
-        winner = playerSelectionMod;
+        winner = "Player";
+        message = messagesList["player"];
     } else if (playerSelectionMod== 'PAPER' && computerSelectionMod == 'ROCK') {
-        winner = playerSelectionMod;
+        winner = "Player";
+        message = messagesList["player"];
     } else {
-        winner = computerSelectionMod;
+        winner = "Computer";
+        message = messagesList["computer"];
     }
 
-    if (winner == 'Tie') {
-        message = 'You tied! Try again.';
-    } else if (winner == playerSelectionMod) {
-        message = `Congratulations! ${playerSelection} beats ${computerSelection}.`;
-    } else {
-        message = `You lost! ${computerSelection} beats ${playerSelection}.`;
+    console.log(message);
+    return winner;
+}
+
+game = () => {
+    let playerScore = 0;
+    let computerScore = 0;
+    let finalGameMessage, overallWinner;
+
+    for (let i = 0; i < 5; i++) {
+        const computerSelection = getComputerChoice();
+        let userInput = window.prompt("Enter 'Rock', 'Paper, or 'Scissors': "); 
+        winner = playRound(userInput, computerSelection);
+
+        switch (winner) {
+            case ("Player"):
+                playerScore += 1;
+                break;
+            case ("Computer"):
+                computerScore += 1;
+                break;
+        }
     }
 
-    return message;
+    if (playerScore === computerScore) {
+        overallWinner = "Tie";
+    } else if (playerScore > computerScore) {
+        overallWinner = "Player";
+    } else {
+        overallWinner = "Computer";
+    }
+
+    finalGameMessage = `Final score: ${playerScore} to ${computerScore}, ${overallWinner}`
+
+    console.log(finalGameMessage);
+    return finalGameMessage;
 }
 
 
 // Call program to test
-const playerSelection = 'paper';
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+game();
