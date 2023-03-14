@@ -3,17 +3,17 @@ getComputerChoice = () => {
     const arr = ['Rock', 'Paper', 'Scissors'];
 
     let computerChoice = arr[Math.floor(Math.random()*arr.length)];
-    console.log(computerChoice);
+    console.log(`Computer choice: ${computerChoice}`);
 
     return computerChoice;
 }
 
 playRound = (playerSelection, computerSelection) => {
 
-    let playerSelectionMod = playerSelection.toUpperCase();
-    let computerSelectionMod = computerSelection.toUpperCase();
+    const playerSelectionMod = playerSelection.toUpperCase();
+    const computerSelectionMod = computerSelection.toUpperCase();
     let winner, message;
-    let messagesList = {
+    const messagesList = {
         tie: 'You tied! Try again.', 
         player: `Congratulations! ${playerSelection} beats ${computerSelection}.`, 
         computer: `You lost! ${computerSelection} beats ${playerSelection}.`
@@ -41,24 +41,23 @@ playRound = (playerSelection, computerSelection) => {
     return winner;
 }
 
-game = () => {
+game = (playerSelection) => {
     let playerScore = 0;
     let computerScore = 0;
     let finalGameMessage, overallWinner;
 
-    for (let i = 0; i < 5; i++) {
-        const computerSelection = getComputerChoice();
-        let userInput = window.prompt("Enter 'Rock', 'Paper, or 'Scissors': "); 
-        winner = playRound(userInput, computerSelection);
 
-        switch (winner) {
-            case ("Player"):
-                playerScore += 1;
-                break;
-            case ("Computer"):
-                computerScore += 1;
-                break;
-        }
+    const computerSelection = getComputerChoice();
+    // let userInput = window.prompt("Enter 'Rock', 'Paper, or 'Scissors': "); 
+    winner = playRound(playerSelection, computerSelection);
+
+    switch (winner) {
+        case ("Player"):
+            playerScore += 1;
+            break;
+        case ("Computer"):
+            computerScore += 1;
+            break;
     }
 
     if (playerScore === computerScore) {
@@ -76,5 +75,20 @@ game = () => {
 }
 
 
-// Call program to test
-game();
+// Call program
+// game();
+
+const rock = document.getElementById('rock');
+rock.addEventListener('click', () => {
+    game('rock');
+});
+
+const paper = document.getElementById('paper');
+paper.addEventListener('click', () => {
+    game('paper');
+});
+
+const scissors = document.getElementById('scissors');
+scissors.addEventListener('click', () => {
+    game('scissors');
+});
