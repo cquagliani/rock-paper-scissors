@@ -41,23 +41,29 @@ playRound = (playerSelection, computerSelection) => {
     return winner;
 }
 
-game = (playerSelection) => {
-    let playerScore = 0;
-    let computerScore = 0;
+let playerScore = 0;
+let computerScore = 0;
+let combinedScore = 0;
+
+game = (winner) => {
+
     let finalGameMessage, overallWinner;
 
+    while (combinedScore < 5) {
+        // winner = playRound(playerSelection, computerSelection);
 
-    const computerSelection = getComputerChoice();
-    // let userInput = window.prompt("Enter 'Rock', 'Paper, or 'Scissors': "); 
-    winner = playRound(playerSelection, computerSelection);
+        switch (winner) {
+            case ("Player"):
+                playerScore += 1;
+                document.getElementById('playerScore').innerHTML = playerScore;
+                break;
+            case ("Computer"):
+                computerScore += 1;
+                document.getElementById('computerScore').innerHTML = computerScore;
+                break;
+        }
 
-    switch (winner) {
-        case ("Player"):
-            playerScore += 1;
-            break;
-        case ("Computer"):
-            computerScore += 1;
-            break;
+        combinedScore = playerScore + computerScore;
     }
 
     if (playerScore === computerScore) {
@@ -74,21 +80,23 @@ game = (playerSelection) => {
     return finalGameMessage;
 }
 
-
-// Call program
-// game();
-
 const rock = document.getElementById('rock');
 rock.addEventListener('click', () => {
-    game('rock');
+    const computerSelection = getComputerChoice(); 
+    winner = playRound("rock", computerSelection)
+    game(winner);
 });
 
 const paper = document.getElementById('paper');
 paper.addEventListener('click', () => {
-    game('paper');
+    const computerSelection = getComputerChoice(); 
+    winner = playRound("paper", computerSelection)
+    game(winner);
 });
 
 const scissors = document.getElementById('scissors');
 scissors.addEventListener('click', () => {
-    game('scissors');
+    const computerSelection = getComputerChoice(); 
+    winner = playRound("scissors", computerSelection)
+    game(winner);
 });
