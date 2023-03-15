@@ -53,6 +53,19 @@
     gap: 30px;
 }
 
+.gameLogInnerWrapper {
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.playerPick, .computerPick {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .scoringMainWrapper {
     display: flex;
     flex-direction: row;
