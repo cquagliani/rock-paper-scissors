@@ -73,27 +73,24 @@ function announceWinner() {
     alert(finalGameMessage);
 }
 
-function checkScore(winner) {
-    if (combinedScore == 5) {
-        announceWinner();
-        resetGame();
-    }
-}
-
 function resetGame() {
     playerScore = 0;
     computerScore = 0;
     combinedScore = 0;
-    winner = "";
 
     document.getElementById('playerScore').innerHTML = playerScore;
     document.getElementById('computerScore').innerHTML = computerScore;
 }
 
 function play(userSelection) {
-    winner = playRound(userSelection);
-    increaseScore(winner);
-    checkScore();
+    if (combinedScore < 5) {
+        winner = playRound(userSelection);
+        increaseScore(winner);
+    } else {
+        announceWinner();
+        resetGame();
+    }
+
 }
 
 /// Event Listeners /// 
