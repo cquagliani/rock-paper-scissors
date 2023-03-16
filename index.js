@@ -46,15 +46,17 @@ function playRound(playerSelection) {
     // Update game log with player & computer picks
     const playerPickParagraph = document.createElement("p");
     const playerPickNode = document.createTextNode(`${playerSelectionMod}`);
+    playerPickParagraph.appendChild(playerPickNode);
 
     const computerPickParagraph = document.createElement("p");
     const computerPickNode = document.createTextNode(`${computerSelectionMod}`);
+    computerPickParagraph.appendChild(computerPickNode);
 
     const playerElement = document.querySelector('#playerPick');
-    playerElement.appendChild(playerPickNode);
+    playerElement.appendChild(playerPickParagraph);
 
     const computerElement = document.querySelector('#computerPick');
-    computerElement.appendChild(computerPickNode);
+    computerElement.appendChild(computerPickParagraph);
 
     // alert(message);
     return winner;

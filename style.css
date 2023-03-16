@@ -2,8 +2,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 100px 25vw;
     height: 100vh;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+.gameOptions {
+    padding: 20px 30px;
 }
 
 .gameOptionsWrapper {
@@ -20,7 +29,7 @@
     align-items: center;
     justify-content: center;
     border: 2px black solid;
-    padding: 30px 50px;
+    padding: 30px 25vw;
     margin: 25px;
 }
 
@@ -28,6 +37,7 @@
     display: flex;
     flex-direction: row;
     gap: 30px;
+    margin-top: -30px;
 }
 
 .playerScore, .computerScore {
@@ -41,7 +51,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     border: 2px black solid;
     padding: 30px 50px;
     margin: 25px;
@@ -51,23 +61,19 @@
     display: flex;
     flex-direction: row;
     gap: 30px;
+    margin-top: -30px;
 }
 
-.gameLogInnerWrapper {
-    display: flex;
-    flex-direction: row;
-    
-}
-
-.playerPick, .computerPick {
+.verticalLog {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .scoringMainWrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 5px;
 }
