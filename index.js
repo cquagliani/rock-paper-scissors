@@ -95,6 +95,15 @@ function resetGame() {
 
     document.getElementById('playerScore').innerHTML = playerScore;
     document.getElementById('computerScore').innerHTML = computerScore;
+    resetGameLog('playerPick');
+    resetGameLog('computerPick');
+}
+
+function resetGameLog(id) {
+    const parent = document.getElementById(id);
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
 
 function play(userSelection) {
@@ -122,4 +131,9 @@ paper.addEventListener('click', () => {
 const scissors = document.getElementById('scissors');
 scissors.addEventListener('click', () => {
     play("scissors");
+});
+
+const restart = document.getElementById('restartButton');
+restart.addEventListener('click', () => {
+    resetGame();
 });

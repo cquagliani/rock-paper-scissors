@@ -77,3 +77,7 @@ h3 {
     flex-direction: column;
     gap: 5px;
 }
+
+.restartButton {
+    padding: 10px;
+}
