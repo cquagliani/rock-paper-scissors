@@ -14,6 +14,11 @@ function getComputerChoice() {
     return computerChoice;
 }
 
+function formatText(text) {
+    let formattedText = text.charAt(0).toUpperCase() + text.toLowerCase().slice(1);
+    return formattedText
+}
+
 function playRound(playerSelection) {
     let computerSelection = getComputerChoice(); 
     const playerSelectionMod = playerSelection.toUpperCase();
@@ -44,12 +49,15 @@ function playRound(playerSelection) {
     }
 
     // Update game log with player & computer picks
+    const formattedPlayer = formatText(playerSelectionMod);
+    const formattedComputer = formatText(computerSelectionMod);
+
     const playerPickParagraph = document.createElement("p");
-    const playerPickNode = document.createTextNode(`${playerSelectionMod}`);
+    const playerPickNode = document.createTextNode(`${formattedPlayer}`);
     playerPickParagraph.appendChild(playerPickNode);
 
     const computerPickParagraph = document.createElement("p");
-    const computerPickNode = document.createTextNode(`${computerSelectionMod}`);
+    const computerPickNode = document.createTextNode(`${formattedComputer}`);
     computerPickParagraph.appendChild(computerPickNode);
 
     const playerElement = document.querySelector('#playerPick');
@@ -58,7 +66,6 @@ function playRound(playerSelection) {
     const computerElement = document.querySelector('#computerPick');
     computerElement.appendChild(computerPickParagraph);
 
-    // alert(message);
     return winner;
 }
 
@@ -88,6 +95,13 @@ function announceWinner() {
     alert(finalGameMessage);
 }
 
+function resetGameLog(id) {
+    const parent = document.getElementById(id);
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function resetGame() {
     playerScore = 0;
     computerScore = 0;
@@ -99,13 +113,6 @@ function resetGame() {
     resetGameLog('computerPick');
 }
 
-function resetGameLog(id) {
-    const parent = document.getElementById(id);
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-}
-
 function play(userSelection) {
     if (combinedScore < 5) {
         winner = playRound(userSelection);
@@ -114,7 +121,6 @@ function play(userSelection) {
         announceWinner();
         resetGame();
     }
-
 }
 
 /// Event Listeners /// 
