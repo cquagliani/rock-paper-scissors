@@ -17,9 +17,11 @@ module.exports = {
         body: ['Sora', 'Inter', 'sans-serif'],
       },
       colors: {
-        primary: '#6AFFAE',
-        secondary: '#5CE2FF',
-        tertiary: '#1F2021',
+        primary: '#6876CF',
+        secondary: '#38BDF8',
+        tertiary: '#0F182A',
+        details: '#E86EAE',
+        subtitles: '#647386',
       }
     },
   },
