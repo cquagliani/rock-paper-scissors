@@ -60,12 +60,23 @@ function playRound(playerSelection) {
     const computerPickNode = document.createTextNode(`${formattedComputer}`);
     computerPickParagraph.appendChild(computerPickNode);
 
+    // Change the color of the game log depending on who won the round
+    if (winner == "Tie") {
+        playerPickParagraph.classList.add('text-slate-50'); 
+        computerPickParagraph.classList.add('text-slate-50');
+    } else {
+        winner == "Player" ? playerPickParagraph.classList.add('text-blue-600') : playerPickParagraph.classList.add('text-red-600');
+        winner == "Computer" ? computerPickParagraph.classList.add('text-blue-600') : computerPickParagraph.classList.add('text-red-600');
+    }
+
+
     const playerElement = document.querySelector('#playerPick');
     playerElement.appendChild(playerPickParagraph);
 
     const computerElement = document.querySelector('#computerPick');
     computerElement.appendChild(computerPickParagraph);
-
+    
+    
     return winner;
 }
 
