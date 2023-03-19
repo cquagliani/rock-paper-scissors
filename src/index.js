@@ -73,6 +73,9 @@ function playRound(playerSelection) {
 		winner == "Computer"
 			? computerPickParagraph.classList.add("text-blue")
 			: computerPickParagraph.classList.add("text-pink");
+
+		playerPickParagraph.classList.add("font-light");
+		computerPickParagraph.classList.add("font-light");
 	}
 
 	const playerElement = document.querySelector("#playerPick");
@@ -97,6 +100,13 @@ function increaseScore(winner) {
 
 	combinedScore = playerScore + computerScore;
 }
+
+setInterval( function checkScore() {
+	if (combinedScore > 4) {
+		announceWinner();
+		resetGame();
+	}
+}, 1);
 
 function announceWinner() {
 	if (playerScore > computerScore) {
@@ -127,30 +137,25 @@ function resetGame() {
 	resetGameLog("computerPick");
 }
 
-function play(userSelection) {
-	if (combinedScore < 5) {
-		winner = playRound(userSelection);
-		increaseScore(winner);
-	} else {
-		announceWinner();
-		resetGame();
-	}
+function btnPress(userSelection) {
+	winner = playRound(userSelection);
+	increaseScore(winner);
 }
 
 /// Event Listeners ///
 const rock = document.getElementById("rock");
 rock.addEventListener("click", () => {
-	play("rock");
+	btnPress("rock");
 });
 
 const paper = document.getElementById("paper");
 paper.addEventListener("click", () => {
-	play("paper");
+	btnPress("paper");
 });
 
 const scissors = document.getElementById("scissors");
 scissors.addEventListener("click", () => {
-	play("scissors");
+	btnPress("scissors");
 });
 
 const restart = document.getElementById("restartButton");
