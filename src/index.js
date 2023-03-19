@@ -102,7 +102,7 @@ function increaseScore(winner) {
 }
 
 setInterval( function checkScore() {
-	if (combinedScore > 4) {
+	if (playerScore > 2 || computerScore > 2) {
 		announceWinner();
 		resetGame();
 	}
@@ -114,10 +114,12 @@ function announceWinner() {
 	alert(finalGameMessage);
 }
 
-function resetGameLog(id) {
-	const parent = document.getElementById(id);
-	while (parent.firstChild) {
-		parent.removeChild(parent.firstChild);
+function resetGameLog(id1, id2) {
+	const playerLog = document.getElementById(id1);
+	const computerLog = document.getElementById(id2);
+	while (playerLog.firstChild || computerLog.firstChild) {
+		playerLog.removeChild(playerLog.firstChild);
+		computerLog.removeChild(computerLog.firstChild);
 	}
 }
 
@@ -128,8 +130,7 @@ function resetGame() {
 
 	document.getElementById("playerScore").innerHTML = playerScore;
 	document.getElementById("computerScore").innerHTML = computerScore;
-	resetGameLog("playerPick");
-	resetGameLog("computerPick");
+	resetGameLog("playerPick", "computerPick");
 }
 
 function btnPress(userSelection) {
