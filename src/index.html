@@ -17,7 +17,7 @@
 		/>
 	</head>
 
-	<body class="bg-background font-['Sora'] relative">
+	<body class="bg-background bg-grid font-['Sora'] relative">
         <picture><source srcset="./assets/docs-dark@30.1a9f8cbf.avif" type="image/avif"><img src="./assets/docs-dark@30.1a9f8cbf.avif" alt="" class="w-[70rem] flex-none max-w-none block absolute top-0 right-10" decoding="async"></picture>
 		<div class=" flex flex-col gap-1 items-center justify-center py-28 px-28 ">
 			<h1 class="text-center font-bold text-white">Rock Paper Scissors</h1>
@@ -39,9 +39,9 @@
             <div class="flex flex-col items-center justify-center pt-32 pb-36 px-40 box">
                 <h4 class="text-gray font-light italic opacity-50 p-0 mb-0">Go on, pick one!</h4>
                 <div class="flex flex-row items-center justify-center gap-4 mt-4">
-                    <button class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md text-base" id="rock">Rock</button>
-                    <button class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md text-base" id="paper">Paper</button>
-                    <button class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md text-base" id="scissors">Scissors</button>
+                    <button class="py-5 px-8 font-bold border-solid border-2 border-purple rounded-md text-base cursor-pointer hover:bg-opacity-75 hover:animate-pulse" id="rock">Rock</button>
+                    <button class="py-5 px-8 font-bold border-solid border-2 border-purple rounded-md text-base cursor-pointer hover:bg-opacity-75 hover:animate-pulse" id="paper">Paper</button>
+                    <button class="py-5 px-8 font-bold border-solid border-2 border-purple rounded-md text-base cursor-pointer hover:bg-opacity-75 hover:animate-pulse" id="scissors">Scissors</button>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
 				</div>
 			</div>
             <div>
-                <button class="p-2.5 border-solid border-4 border-purple rounded-md" id="restartButton">
+                <button class="p-2.5 border-solid border-2 border-purple rounded-md" id="restartButton">
                     <svg
                         class="hover:animate-spin"
                         xmlns="http://www.w3.org/2000/svg"
