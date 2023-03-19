@@ -17,11 +17,11 @@
 		/>
 	</head>
 
-	<body class="bg-background font-['Sora']">
-		<div class=" flex flex-col gap-1 items-center justify-center py-28 px-28">
+	<body class="bg-background font-['Sora'] relative">
+        <picture><source srcset="./assets/docs-dark@30.1a9f8cbf.avif" type="image/avif"><img src="./assets/docs-dark@30.1a9f8cbf.avif" alt="" class="w-[70rem] flex-none max-w-none block absolute top-0 right-10" decoding="async"></picture>
+		<div class=" flex flex-col gap-1 items-center justify-center py-28 px-28 ">
 			<h1 class="text-center font-bold text-white">Rock Paper Scissors</h1>
-
-			<div class="flex flex-col items-center justify-center border border-gray border-solid rounded-3xl py-8 px-52 m-6">
+			<div class="flex flex-col items-center justify-center  rounded-3xl py-8 px-52 m-6 box">
 				<h3 class="text-3xl text-white">Scoreboard</h3>
 
 				<div class="flex flex-row gap-8 -mt-8">
@@ -36,28 +36,16 @@
 				</div>
 			</div>
 
-			<div class="flex flex-row items-center justify-center gap-2.5 border border-gray border-solid rounded-3xl py-40 px-52 m-6">
-				<button
-					class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md"
-					id="rock"
-				>
-					Rock
-				</button>
-				<button
-					class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md"
-					id="paper"
-				>
-					Paper
-				</button>
-				<button
-					class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md"
-					id="scissors"
-				>
-					Scissors
-				</button>
-			</div>
+            <div class="flex flex-col items-center justify-center pt-32 pb-36 px-40 box">
+                <h4 class="text-gray font-light italic opacity-50 p-0 mb-0">Go on, pick one!</h4>
+                <div class="flex flex-row items-center justify-center gap-4 mt-4">
+                    <button class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md text-base" id="rock">Rock</button>
+                    <button class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md text-base" id="paper">Paper</button>
+                    <button class="py-5 px-8 font-bold border-solid border-4 border-purple rounded-md text-base" id="scissors">Scissors</button>
+                </div>
+            </div>
 
-			<div class="flex flex-col items-center justify-start border border-gray border-solid rounded-3xl py-8 px-52 m-6">
+			<div class="flex flex-col items-center justify-start py-8 px-52 m-6 box">
 				<h3 class="text-3xl text-white">Game Log</h3>
 				<div class="flex flex-row gap-8 -mt-8">
 					<div class="flex flex-col items-center text-center">
@@ -71,10 +59,7 @@
 				</div>
 			</div>
             <div>
-                <button
-                    class="p-2.5 border-solid border-4 border-purple rounded-md"
-                    id="restartButton"
-                >
+                <button class="p-2.5 border-solid border-4 border-purple rounded-md" id="restartButton">
                     <svg
                         class="hover:animate-spin"
                         xmlns="http://www.w3.org/2000/svg"

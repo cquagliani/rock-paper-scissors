@@ -106,15 +106,10 @@ setInterval( function checkScore() {
 		announceWinner();
 		resetGame();
 	}
-}, 1);
+}, 4);
 
 function announceWinner() {
-	if (playerScore > computerScore) {
-		overallWinner = "Player";
-	} else {
-		overallWinner = "Computer";
-	}
-
+	(playerScore > computerScore) ? overallWinner = "Player" : overallWinner = "Computer";
 	finalGameMessage = `Final score: ${playerScore} to ${computerScore}, ${overallWinner}`;
 	alert(finalGameMessage);
 }
