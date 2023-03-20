@@ -100,7 +100,6 @@ function increaseScore(winner) {
 setInterval(function checkScore() {
 	if (playerScore > 2 || computerScore > 2) {
 		announceWinner();
-		resetGame();
 	}
 }, 4);
 
@@ -108,8 +107,22 @@ function announceWinner() {
 	playerScore > computerScore
 		? (overallWinner = "Player")
 		: (overallWinner = "Computer");
-	finalGameMessage = `Final score: ${playerScore} to ${computerScore}, ${overallWinner}`;
-	alert(finalGameMessage)
+
+	if (overallWinner == "Player") {
+		winModal.style.display = "flex";
+		winModal.style.justifyContent = "center";
+		winModal.style.alignItems = "center";
+		winModal.style.zIndex = "1";
+		winModal.style.height = "95vh";
+		winModal.style.width = "95vw";
+		wrapper.classList.add("hidden");
+	} else {
+		resetGame();
+	}
+
+
+	// finalGameMessage = `Final score: ${playerScore} to ${computerScore}, ${overallWinner}`;
+	// alert(finalGameMessage)
 }
 
 function resetGameLog(id1, id2) {
@@ -157,14 +170,17 @@ let restartModal = document.getElementById("restartModal");
 let restartButton = document.getElementById("restartButton");
 let yesRestart = document.getElementById("yesRestart");
 let noRestart = document.getElementById("noRestart");
+let winModal = document.getElementById("winModal");
+let playAgainWin = document.getElementById("playAgainWin");
 
 restartButton.onclick = function () {
 	if (!(rounds == 0)) {
-		restartModal.style.display = "block";
-		restartModal.style.position = "absolute";
+		restartModal.style.display = "flex";
 		restartModal.style.justifyContent = "center";
 		restartModal.style.alignItems = "center";
 		restartModal.style.zIndex = "1";
+		restartModal.style.height = "95vh";
+		restartModal.style.width = "95vw";
 		wrapper.classList.add("hidden");
 	}
 };
@@ -179,3 +195,9 @@ noRestart.onclick = function () {
 	wrapper.classList.remove("hidden");
 	restartModal.style.display = "none";
 };
+
+playAgainWin.onclick = function () {
+	resetGame();
+	wrapper.classList.remove("hidden");
+	restartModal.style.display = "none";
+}
