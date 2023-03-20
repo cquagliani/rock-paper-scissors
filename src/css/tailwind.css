@@ -139,8 +139,28 @@
   top: -0.75rem
 }
 
+.z-10 {
+  z-index: 10
+}
+
+.z-\[1\] {
+  z-index: 1
+}
+
+.z-40 {
+  z-index: 40
+}
+
+.z-0 {
+  z-index: 0
+}
+
 .m-6 {
   margin: 1.5rem
+}
+
+.m-0 {
+  margin: 0px
 }
 
 .mx-auto {
@@ -304,6 +324,10 @@
   justify-content: flex-start
 }
 
+.justify-end {
+  justify-content: flex-end
+}
+
 .justify-center {
   justify-content: center
 }
@@ -400,6 +424,14 @@
 
 .bg-opacity-100 {
   --tw-bg-opacity: 1
+}
+
+.bg-opacity-30 {
+  --tw-bg-opacity: 0.3
+}
+
+.bg-opacity-10 {
+  --tw-bg-opacity: 0.1
 }
 
 .p-0 {
@@ -515,6 +547,18 @@
 
 .pt-32 {
   padding-top: 8rem
+}
+
+.pl-5 {
+  padding-left: 1.25rem
+}
+
+.pt-5 {
+  padding-top: 1.25rem
+}
+
+.pt-1 {
+  padding-top: 0.25rem
 }
 
 .text-center {
