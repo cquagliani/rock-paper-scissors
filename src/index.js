@@ -1,10 +1,9 @@
-/// Variables ///
 let playerScore = 0;
 let computerScore = 0;
 let combinedScore = 0;
+let rounds = 0;
 let finalGameMessage, overallWinner;
 
-/// Functions ///
 function getComputerChoice() {
 	const arr = ["Rock", "Paper", "Scissors"];
 
@@ -15,37 +14,34 @@ function getComputerChoice() {
 }
 
 function formatText(text) {
-	let formattedText = text.charAt(0).toUpperCase() + text.toLowerCase().slice(1);
+	let formattedText =
+		text.charAt(0).toUpperCase() + text.toLowerCase().slice(1);
 	return formattedText;
 }
 
 function playRound(playerSelection) {
+	rounds++;
 	let computerSelection = getComputerChoice();
 	const playerSelectionMod = playerSelection.toUpperCase();
 	const computerSelectionMod = computerSelection.toUpperCase();
-	let winner, message;
+	let winner;
 
 	if (playerSelectionMod == computerSelectionMod) {
 		winner = "Tie";
-
 	} else if (
 		playerSelectionMod == "ROCK" &&
 		computerSelectionMod == "SCISSORS"
 	) {
 		winner = "Player";
-
 	} else if (
 		playerSelectionMod == "SCISSORS" &&
 		computerSelectionMod == "PAPER"
 	) {
 		winner = "Player";
-
 	} else if (playerSelectionMod == "PAPER" && computerSelectionMod == "ROCK") {
 		winner = "Player";
-
 	} else {
 		winner = "Computer";
-
 	}
 
 	// Update game log with player & computer picks
@@ -101,7 +97,7 @@ function increaseScore(winner) {
 	combinedScore = playerScore + computerScore;
 }
 
-setInterval( function checkScore() {
+setInterval(function checkScore() {
 	if (playerScore > 2 || computerScore > 2) {
 		announceWinner();
 		resetGame();
@@ -109,9 +105,11 @@ setInterval( function checkScore() {
 }, 4);
 
 function announceWinner() {
-	(playerScore > computerScore) ? overallWinner = "Player" : overallWinner = "Computer";
+	playerScore > computerScore
+		? (overallWinner = "Player")
+		: (overallWinner = "Computer");
 	finalGameMessage = `Final score: ${playerScore} to ${computerScore}, ${overallWinner}`;
-	alert(finalGameMessage);
+	alert(finalGameMessage)
 }
 
 function resetGameLog(id1, id2) {
@@ -124,6 +122,7 @@ function resetGameLog(id1, id2) {
 }
 
 function resetGame() {
+	rounds = 0;
 	playerScore = 0;
 	computerScore = 0;
 	combinedScore = 0;
@@ -138,7 +137,6 @@ function btnPress(userSelection) {
 	increaseScore(winner);
 }
 
-/// Event Listeners ///
 const rock = document.getElementById("rock");
 rock.addEventListener("click", () => {
 	btnPress("rock");
@@ -154,7 +152,30 @@ scissors.addEventListener("click", () => {
 	btnPress("scissors");
 });
 
-const restart = document.getElementById("restartButton");
-restart.addEventListener("click", () => {
+let wrapper = document.getElementById("wrapper");
+let restartModal = document.getElementById("restartModal");
+let restartButton = document.getElementById("restartButton");
+let yesRestart = document.getElementById("yesRestart");
+let noRestart = document.getElementById("noRestart");
+
+restartButton.onclick = function () {
+	if (!(rounds == 0)) {
+		restartModal.style.display = "block";
+		restartModal.style.position = "absolute";
+		restartModal.style.justifyContent = "center";
+		restartModal.style.alignItems = "center";
+		restartModal.style.zIndex = "1";
+		wrapper.classList.add("hidden");
+	}
+};
+
+yesRestart.onclick = function () {
 	resetGame();
-});
+	wrapper.classList.remove("hidden");
+	restartModal.style.display = "none";
+}
+
+noRestart.onclick = function () {
+	wrapper.classList.remove("hidden");
+	restartModal.style.display = "none";
+};
