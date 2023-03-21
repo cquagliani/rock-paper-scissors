@@ -4,6 +4,7 @@ let computerScore = 0;
 let combinedScore = 0;
 let rounds = 0;
 let overallWinner;
+const gameOptions = ["Rock", "Paper", "Scissors"];
 const wrapper = document.getElementById("wrapper");
 const restartModal = document.getElementById("restartModal");
 const restartButton = document.getElementById("restartButton");
@@ -18,33 +19,31 @@ const computerLog = document.getElementById("computerPick");
 
 function playRound(playerSelection) {
 	rounds++;
-	const computerSelection = getComputerChoice();
-	const formattedPlayer = formatText(playerSelection);
-	const formattedComputer = formatText(computerSelection);
 	let winner;
+	const computerSelection = () => { return gameOptions[Math.floor(Math.random() * gameOptions.length)]; }
+	const formatText = (text) => { return text.charAt(0).toUpperCase() + text.toLowerCase().slice(1); }
+	const formattedPlayer = formatText(playerSelection);
+	const formattedComputer = formatText(computerSelection());
 
 	if (formattedPlayer == formattedComputer) {
 		winner = "Tie";
-	} else if (
-		formattedPlayer == "Rock" &&
-		formattedComputer == "Scissors"
+	} else if (formattedPlayer == "Rock" && formattedComputer == "Scissors") {
+		winner = "Player";
+	} else if (formattedPlayer == "Scissors" && formattedComputer == "Paper"
 	) {
 		winner = "Player";
-	} else if (
-		formattedPlayer == "Scissors" &&
-		formattedComputer == "Paper"
-	) {
-		winner = "Player";
-	} else if (
-		formattedPlayer == "Paper" && 
-		formattedComputer == "Rock"
+	} else if (formattedPlayer == "Paper" && formattedComputer == "Rock"
 	) {
 		winner = "Player";
 	} else {
 		winner = "Computer";
 	}
 
-	// Update game log with player & computer picks
+	updateGameLog(formattedPlayer, formattedComputer, winner);
+	return winner;
+}
+
+function updateGameLog(formattedPlayer, formattedComputer, winner) {
 	const playerPickParagraph = document.createElement("p");
 	const playerPickNode = document.createTextNode(`${formattedPlayer}`);
 	playerPickParagraph.appendChild(playerPickNode);
@@ -73,22 +72,6 @@ function playRound(playerSelection) {
 
 	playerLog.appendChild(playerPickParagraph);
 	computerLog.appendChild(computerPickParagraph);
-
-	return winner;
-}
-
-function getComputerChoice() {
-	const arr = ["Rock", "Paper", "Scissors"];
-
-	const computerChoice = arr[Math.floor(Math.random() * arr.length)];
-	console.log(`Computer choice: ${computerChoice}`);
-
-	return computerChoice;
-}
-
-function formatText(text) {
-	const formattedText = text.charAt(0).toUpperCase() + text.toLowerCase().slice(1);
-	return formattedText;
 }
 
 function increaseScore(winner) {
@@ -104,10 +87,7 @@ function increaseScore(winner) {
 	}
 
 	combinedScore = playerScore + computerScore;
-
-	if (playerScore > 10 || computerScore > 10) {
-		showModal();
-	}
+	if (playerScore > 2 || computerScore > 2) { showModal(); }
 }
 
 function showModal() {
@@ -118,7 +98,7 @@ function showModal() {
 		winModal.style.display = "flex";
 		winModal.style.justifyContent = "center";
 		winModal.style.alignItems = "center";
-		winModal.style.zIndex = "1";
+		winModal.style.zIndex = "999";
 		winModal.style.height = "95vh";
 		winModal.style.width = "95vw";
 		wrapper.classList.add("hidden");
@@ -127,7 +107,7 @@ function showModal() {
 		loseModal.style.display = "flex";
 		loseModal.style.justifyContent = "center";
 		loseModal.style.alignItems = "center";
-		loseModal.style.zIndex = "1";
+		loseModal.style.zIndex = "999";
 		loseModal.style.height = "95vh";
 		loseModal.style.width = "95vw";
 		wrapper.classList.add("hidden");
