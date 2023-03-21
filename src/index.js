@@ -1,53 +1,50 @@
+// Variables // 
 let playerScore = 0;
 let computerScore = 0;
 let combinedScore = 0;
 let rounds = 0;
-let finalGameMessage, overallWinner;
-
-function getComputerChoice() {
-	const arr = ["Rock", "Paper", "Scissors"];
-
-	let computerChoice = arr[Math.floor(Math.random() * arr.length)];
-	console.log(`Computer choice: ${computerChoice}`);
-
-	return computerChoice;
-}
-
-function formatText(text) {
-	let formattedText =
-		text.charAt(0).toUpperCase() + text.toLowerCase().slice(1);
-	return formattedText;
-}
+let overallWinner;
+const wrapper = document.getElementById("wrapper");
+const restartModal = document.getElementById("restartModal");
+const restartButton = document.getElementById("restartButton");
+const yesRestart = document.getElementById("yesRestart");
+const noRestart = document.getElementById("noRestart");
+const winModal = document.getElementById("winModal");
+const playAgainWin = document.getElementById("playAgainWin");
+const loseModal = document.getElementById("loseModal");
+const playAgainLose = document.getElementById("playAgainLose");
+const playerLog = document.getElementById("playerPick");
+const computerLog = document.getElementById("computerPick");
 
 function playRound(playerSelection) {
 	rounds++;
-	let computerSelection = getComputerChoice();
-	const playerSelectionMod = playerSelection.toUpperCase();
-	const computerSelectionMod = computerSelection.toUpperCase();
+	const computerSelection = getComputerChoice();
+	const formattedPlayer = formatText(playerSelection);
+	const formattedComputer = formatText(computerSelection);
 	let winner;
 
-	if (playerSelectionMod == computerSelectionMod) {
+	if (formattedPlayer == formattedComputer) {
 		winner = "Tie";
 	} else if (
-		playerSelectionMod == "ROCK" &&
-		computerSelectionMod == "SCISSORS"
+		formattedPlayer == "Rock" &&
+		formattedComputer == "Scissors"
 	) {
 		winner = "Player";
 	} else if (
-		playerSelectionMod == "SCISSORS" &&
-		computerSelectionMod == "PAPER"
+		formattedPlayer == "Scissors" &&
+		formattedComputer == "Paper"
 	) {
 		winner = "Player";
-	} else if (playerSelectionMod == "PAPER" && computerSelectionMod == "ROCK") {
+	} else if (
+		formattedPlayer == "Paper" && 
+		formattedComputer == "Rock"
+	) {
 		winner = "Player";
 	} else {
 		winner = "Computer";
 	}
 
 	// Update game log with player & computer picks
-	const formattedPlayer = formatText(playerSelectionMod);
-	const formattedComputer = formatText(computerSelectionMod);
-
 	const playerPickParagraph = document.createElement("p");
 	const playerPickNode = document.createTextNode(`${formattedPlayer}`);
 	playerPickParagraph.appendChild(playerPickNode);
@@ -74,12 +71,24 @@ function playRound(playerSelection) {
 		computerPickParagraph.classList.add("font-light");
 	}
 
-	const playerElement = document.querySelector("#playerPick");
-	const computerElement = document.querySelector("#computerPick");
-	playerElement.appendChild(playerPickParagraph);
-	computerElement.appendChild(computerPickParagraph);
+	playerLog.appendChild(playerPickParagraph);
+	computerLog.appendChild(computerPickParagraph);
 
 	return winner;
+}
+
+function getComputerChoice() {
+	const arr = ["Rock", "Paper", "Scissors"];
+
+	const computerChoice = arr[Math.floor(Math.random() * arr.length)];
+	console.log(`Computer choice: ${computerChoice}`);
+
+	return computerChoice;
+}
+
+function formatText(text) {
+	const formattedText = text.charAt(0).toUpperCase() + text.toLowerCase().slice(1);
+	return formattedText;
 }
 
 function increaseScore(winner) {
@@ -95,20 +104,17 @@ function increaseScore(winner) {
 	}
 
 	combinedScore = playerScore + computerScore;
+
+	if (playerScore > 10 || computerScore > 10) {
+		showModal();
+	}
 }
 
-setInterval(function checkScore() {
-	if (playerScore > 2 || computerScore > 2) {
-		announceWinner();
-	}
-}, 4);
-
-function announceWinner() {
-	playerScore > computerScore
-		? (overallWinner = "Player")
-		: (overallWinner = "Computer");
+function showModal() {
+	playerScore > computerScore ? (overallWinner = "Player") : (overallWinner = "Computer");
 
 	if (overallWinner == "Player") {
+		// Show Player Won Modal
 		winModal.style.display = "flex";
 		winModal.style.justifyContent = "center";
 		winModal.style.alignItems = "center";
@@ -117,6 +123,7 @@ function announceWinner() {
 		winModal.style.width = "95vw";
 		wrapper.classList.add("hidden");
 	} else {
+		// Show Player Lost Modal
 		loseModal.style.display = "flex";
 		loseModal.style.justifyContent = "center";
 		loseModal.style.alignItems = "center";
@@ -127,9 +134,7 @@ function announceWinner() {
 	}
 }
 
-function resetGameLog(id1, id2) {
-	const playerLog = document.getElementById(id1);
-	const computerLog = document.getElementById(id2);
+function resetGameLog() {
 	while (playerLog.firstChild || computerLog.firstChild) {
 		playerLog.removeChild(playerLog.firstChild);
 		computerLog.removeChild(computerLog.firstChild);
@@ -144,9 +149,10 @@ function resetGame() {
 
 	document.getElementById("playerScore").innerHTML = playerScore;
 	document.getElementById("computerScore").innerHTML = computerScore;
-	resetGameLog("playerPick", "computerPick");
+	resetGameLog();
 }
 
+// Event Listeners & Button Actions // 
 function btnPress(userSelection) {
 	winner = playRound(userSelection);
 	increaseScore(winner);
@@ -154,28 +160,18 @@ function btnPress(userSelection) {
 
 const rock = document.getElementById("rock");
 rock.addEventListener("click", () => {
-	btnPress("rock");
+	btnPress("Rock");
 });
 
 const paper = document.getElementById("paper");
 paper.addEventListener("click", () => {
-	btnPress("paper");
+	btnPress("Paper");
 });
 
 const scissors = document.getElementById("scissors");
 scissors.addEventListener("click", () => {
-	btnPress("scissors");
+	btnPress("Scissors");
 });
-
-let wrapper = document.getElementById("wrapper");
-let restartModal = document.getElementById("restartModal");
-let restartButton = document.getElementById("restartButton");
-let yesRestart = document.getElementById("yesRestart");
-let noRestart = document.getElementById("noRestart");
-let winModal = document.getElementById("winModal");
-let playAgainWin = document.getElementById("playAgainWin");
-let loseModal = document.getElementById("loseModal");
-let playAgainLose = document.getElementById("playAgainLose");
 
 restartButton.onclick = function () {
 	if (!(rounds == 0)) {
